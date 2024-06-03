@@ -20,6 +20,10 @@ var _ = {};
 *   _.identity(5) === 5
 *   _.identity({a: "b"}) === {a: "b"}
 */
+_.identity = function(value){
+    //returns value unchanged
+    return value;
+}
 
 
 /** _.typeOf
@@ -41,6 +45,33 @@ var _ = {};
 * _.typeOf("javascript") -> "string"
 * _.typeOf([1,2,3]) -> "array"
 */
+_.typeOf = function(value){
+    //if statement to determine what type of data value is
+    //if type is of string
+    if (typeof value === 'string'){
+        return 'string';
+        //if type of is function
+    } else if (typeof value === 'function'){
+        return 'function';
+    } //if value is an array : return "array" 
+      else if(Array.isArray(value) {
+        return 'array';
+        //if value is typeof object AND not an instance of date
+    } else if(typeof value === 'object' && !(value instanceof Date)){
+        return 'object';
+        //if value is null
+    } else if(value === null){
+        return 'null';
+        //if value is = to boolean
+    } else if(typeof value === 'boolean'){
+        return 'boolean'
+
+    }   //if value is undefined
+      else if(value === undefined){
+        return undefined;
+      }
+    
+}
 
 
 /** _.first
