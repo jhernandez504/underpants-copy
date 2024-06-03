@@ -23,7 +23,7 @@ var _ = {};
 _.identity = function(value){
     //returns value unchanged
     return value;
-}
+};
 
 
 /** _.typeOf
