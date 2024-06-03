@@ -20,7 +20,7 @@ var _ = {};
 *   _.identity(5) === 5
 *   _.identity({a: "b"}) === {a: "b"}
 */
-_.identity = function(value){
+var _.identity = function(value){
     //returns value unchanged
     return value;
 };
