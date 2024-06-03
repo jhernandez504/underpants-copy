@@ -208,6 +208,27 @@ var _ = {};
 * Examples:
 *   _.map([1,2,3,4], function(e){return e * 2}) -> [2,4,6,8]
 */
+_.map = function(collection, func){
+    //create output array
+    let output = [];
+    //determine if input collection is an array
+    if(Array.isArray(collection)){
+        //iterate over collection
+        for (let i = 0; i < collection.length; i++){
+            //push result of invoking function on the element, index, and collection
+            output.push(func(collection[i], i, collection));
+        }
+    } else{//else its an object
+        //iterate over collection
+        output.push(func(/current value/, /curretkey/, collection));
+        //invoke function on the value, key and collection
+        
+        //take the return value of the function call and push into array
+    }
+        
+    //return output array
+    return output;
+}
 
 
 /** _.pluck
