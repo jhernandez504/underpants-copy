@@ -225,6 +225,31 @@ _.contains = function(array, value) {
 *   _.each(["a","b","c"], function(e,i,a){ console.log(e)});
 *      -> should log "a" "b" "c" to the console
 */
+_.each = function(collection, func){
+    //if conditional to test if collection is array
+    if(Array.isArray(collection)){
+        //loop thru array
+        for(let i = 0; i < collection.length; i++){
+            // call func to to test element, index, array
+            if(func(collection[i], i, collection)){
+                console.log(collection[i]);
+            }
+        }
+    } else{
+        //for in loop thru obj
+        for(let key in collection){
+            //if conditional calling func to test value, key and obj
+            if(func(collection[key], key, collection)){
+                //logs every key and value
+                console.log(collection[key]);
+            }
+        }
+    }
+    
+    
+   
+
+}
 
 
 /** _.unique
@@ -236,7 +261,20 @@ _.contains = function(array, value) {
 * Examples:
 *   _.unique([1,2,2,4,5,6,5,2]) -> [1,2,4,5,6]
 */
-
+_.unique = function(array){
+    //create empty array to hold elements of given array with duplicates removed
+    let filteredArray = [];
+    //for loop to iterate array calling func to test if each index is === -1 
+    array.forEach(function(value) {
+        if (filteredArray.indexOf(value) === -1) {
+          //push value to filteredArray
+          filteredArray.push(value);
+        }
+    
+});
+    //return filteredArray
+    return filteredArray;
+};
 
 /** _.filter
 * Arguments:
@@ -253,6 +291,19 @@ _.contains = function(array, value) {
 * Extra Credit:
 *   use _.each in your implementation
 */
+_.filter = function(array, func){
+    //create new tempArray
+    let output = [];
+    //for loop to iterate over array
+    for (let i = 0; i < array.length; i++){
+      //if conditional to call func that test at index if it returns data that is truthy
+      if(func(array[i], i, array) === true){
+        output.push(array[i]);
+      }
+    }
+    return output;
+    
+};
 
 
 /** _.reject
@@ -267,6 +318,18 @@ _.contains = function(array, value) {
 * Examples:
 *   _.reject([1,2,3,4,5], function(e){return e%2 === 0}) -> [1,3,5]
 */
+_.reject = function(array, func){
+     //create new tempArray
+     let output = [];
+     //for loop to iterate over array
+     for (let i = 0; i < array.length; i++){
+       //if conditional to call func that test at index if it returns data that is truthy
+       if(func(array[i], i, array) === false){
+         output.push(array[i]);
+       }
+     }
+     return output;
+};
 
 
 /** _.partition
@@ -287,6 +350,28 @@ _.contains = function(array, value) {
 *   }); -> [[2,4],[1,3,5]]
 }
 */
+_.partition = function(array, func){
+    //declare and initialize empty arrays to hold falsy, truthy and combined values
+    let falsyArray = [];
+    let truthyArray = [];
+    let joinedArray = [];
+    //loop thru array
+    for(let i = 0; i < array.length; i++){
+        //if conditional to call func to test element, key, array if true
+        if(func(array[i], i, array) === true) {
+            //pushes value at array[i] to truthyArray if true
+            truthyArray.push(array[i]);
+        } else {
+            //if false, pushes value at array[i] to falsyArray
+            falsyArray.push(array[i]);
+        }
+    }
+    //assigns index 0 to truthyarray and 1 to falsy
+    joinedArray[0] = truthyArray;
+    joinedArray[1] = falsyArray;
+    //returns joinedArray
+    return joinedArray;
+};
 
 
 /** _.map
@@ -316,10 +401,12 @@ _.map = function(collection, func){
         }
     } else{//else its an object
         //iterate over collection
-        output.push(func(/current value/, /curretkey/, collection));
+        for (let key in collection){
+        output.push(func(collection[key], key, collection));
         //invoke function on the value, key and collection
         
         //take the return value of the function call and push into array
+        }
     }
         
     //return output array
@@ -337,6 +424,9 @@ _.map = function(collection, func){
 * Examples:
 *   _.pluck([{a: "one"}, {a: "two"}], "a") -> ["one", "two"]
 */
+_.pluck = function (array, property) {
+    if(func)
+};
 
 
 /** _.every
