@@ -20,7 +20,7 @@ var _ = {};
 *   _.identity(5) === 5
 *   _.identity({a: "b"}) === {a: "b"}
 */
-var _.identity = function(value){
+ _.identity = function(value){
     //returns value unchanged
     return value;
 };
@@ -48,28 +48,31 @@ var _.identity = function(value){
 _.typeOf = function(value){
     //if statement to determine what type of data value is
     //if type is of string
-    if (typeof value === 'string'){
+    if (typeof (value) === 'string'){
         return 'string';
         //if type of is function
     } else if (typeof value === 'function'){
         return 'function';
     } //if value is an array : return "array" 
-      else if(Array.isArray(value) {
+      else if(Array.isArray(value)) {
         return 'array';
-        //if value is typeof object AND not an instance of date
-    } else if(typeof value === 'object' && !(value instanceof Date)){
+        //if value is typeof object AND not an instance of date AND not null
+    } else if(typeof (value) === 'object' && !(value instanceof Date) && value !== null){
         return 'object';
         //if value is null
     } else if(value === null){
         return 'null';
         //if value is = to boolean
-    } else if(typeof value === 'boolean'){
+    } else if(typeof (value) === 'boolean'){
         return 'boolean'
 
     }   //if value is undefined
-      else if(value === undefined){
-        return undefined;
-      }
+      else if(typeof (value) === 'undefined'){
+        return 'undefined';
+        //if value is type of string
+    } else if(typeof (value) === 'number'){
+        return 'number';
+    }
     
 }
 
@@ -91,7 +94,25 @@ _.typeOf = function(value){
 *   _.first(["a", "b", "c"], 1) -> "a"
 *   _.first(["a", "b", "c"], 2) -> ["a", "b"]
 */
+_.first = function(array, number){
+    //if condition to check if array is not an array
+    if (!(Array.isArray(array))){
+        return [];
 
+    }
+    //checks if number is not given or not a number
+    else if(typeof number !== 'number' || number === undefined) {
+        return array[0];
+      //checks if number is negative
+    } else if(number < 0) {
+        //return empty array if number is neg
+        return [];
+    }
+    else{
+        //returns array from index 0 to index (number) if passed thru all conditions
+        return array.slice(0, number);
+    }
+};
 
 /** _.last
 * Arguments:
@@ -110,6 +131,23 @@ _.typeOf = function(value){
 *   _.last(["a", "b", "c"], 1) -> "c"
 *   _.last(["a", "b", "c"], 2) -> ["b", "c"]
 */
+_.last = function(array, number) {
+    //returns empty array if array param isn't an array
+    if (!(Array.isArray(array))){
+        return [];
+    } else if(typeof number !== 'number' || number === undefined){
+        //returns last element in array
+        return array[array.length - 1];
+      //else if to check if number is neg
+    } else if(number < 0){
+        //returns empty arr
+        return [];
+    } else{
+        //returns makes sure number is !> array length using Math.max and 
+        // that array from number to atleast 0 is returned 
+        return array.slice(Math.max((array.length - number), 0));
+    }
+}
 
 
 /** _.indexOf
@@ -127,7 +165,19 @@ _.typeOf = function(value){
 *   _.indexOf(["a","b","c"], "c") -> 2
 *   _.indexOf(["a","b","c"], "d") -> -1
 */
-
+_.indexOf = function(array, value){
+    //for loop to iterate thru array
+    for (let i = 0; i < array.length; i++) {
+        //if condition to check if value is in array
+        if(array[i] === value) {
+            //returns index
+            return i;
+        }
+        
+    }
+    //return -1 if value isnt in array
+    return -1;
+}
 
 /** _.contains
 * Arguments:
@@ -143,7 +193,22 @@ _.typeOf = function(value){
 * Examples:
 *   _.contains([1,"two", 3.14], "two") -> true
 */
-
+_.contains = function(array, value) {
+    //return false if value is undefined if false runs function 
+    return value === undefined ? false : (function(){
+        //loop to iterate thru array
+        for (let i = 0; i < array.length; i++){
+            //if condition if value is in array index, if not increment index
+            if( array[i] === value){
+                return true;
+            }
+        }
+        //returns false by default
+        return false;
+        
+    })(); 
+  
+}
 
 /** _.each
 * Arguments:
