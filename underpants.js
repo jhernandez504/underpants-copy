@@ -503,6 +503,39 @@ _.every = (collection, func) => {
 *   _.some([1,3,5], function(e){return e % 2 === 0}) -> false
 *   _.some([1,2,3], function(e){return e % 2 === 0}) -> true
 */
+_.some = (collection, func) => {
+    
+    //return true atleast 1 value is truthy
+    if(func = func || function(value) {
+        return value;
+        
+    })
+
+    //check if collection is array
+    if(Array.isArray(collection)){
+        //loop thru array
+        for(let i = 0; i < collection.length; i++){
+            //test func using argu collection[i], index, collection
+            if(func(collection[i], i , collection)){
+                //returns true once 1 condition is met
+               return true; 
+            }
+            
+        }
+    }   //assumes if not array, its object
+    else{
+        //for in loop to iterate object
+        for(let key in collection){
+            //if condition to test func(collection[key], key, collection)
+            if(func(collection[key], key, collection)){
+                //returns true if 1 true
+                return true;
+            }
+        }
+    }
+    //returns false if passes thru loops without true being returned
+    return false;
+}
 
 
 /** _.reduce
