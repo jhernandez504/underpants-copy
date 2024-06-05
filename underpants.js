@@ -595,6 +595,19 @@ _.reduce = function(array, func, seed){
 *   _.extend(data, {b:"two"}); -> data now equals {a:"one",b:"two"}
 *   _.extend(data, {a:"two"}); -> data now equals {a:"two"}
 */
+_.extend = (object1, ...objects) => {
+    
+    //for of loop to iterate objects
+    for(let currentObject of objects){
+        //for in loop to iterate properties of each obj
+        for(let key in currentObject){
+            //push each key value into object1 from each current object 
+            object1[key] = currentObject[key];
+        }
+    }
+    //returns modified object1 object
+    return object1;
+}
 
 //////////////////////////////////////////////////////////////////////
 // DON'T REMOVE THIS CODE ////////////////////////////////////////////
