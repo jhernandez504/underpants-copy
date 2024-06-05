@@ -245,12 +245,7 @@ _.each = function(collection, func){
             }
         }
     }
-    
-    
-   
-
 }
-
 
 /** _.unique
 * Arguments:
@@ -271,7 +266,7 @@ _.unique = function(array){
           filteredArray.push(value);
         }
     
-});
+    });
     //return filteredArray
     return filteredArray;
 };
@@ -301,8 +296,7 @@ _.filter = function(array, func){
         output.push(array[i]);
       }
     }
-    return output;
-    
+    return output;   
 };
 
 
@@ -425,7 +419,13 @@ _.map = function(collection, func){
 *   _.pluck([{a: "one"}, {a: "two"}], "a") -> ["one", "two"]
 */
 _.pluck = function (array, property) {
-    if(func)
+    //returns the result of invoking _.map function using using 
+    //arguments array, and function that takes in object 
+    //which is a function that returns the objects prop value
+    return _.map(array, function(object){
+        //returns objects property value
+        return object[property];
+    });
 };
 
 
@@ -449,6 +449,38 @@ _.pluck = function (array, property) {
 *   _.every([2,4,6], function(e){return e % 2 === 0}) -> true
 *   _.every([1,2,3], function(e){return e % 2 === 0}) -> false
 */
+_.every = (collection, func) => {
+   //if there is no function, check if return value is truthy
+   func = func || function(value){
+    return !!value;
+   }
+        //check if collection is array
+        if(Array.isArray(collection)){
+            //for loop thru array
+            for(let i = 0; i < collection.length; i++){
+                //returns false if func(collection[i], i, collection) = false
+                if(!func(collection[i], i, collection)){
+                    return false;
+                }
+            }
+        }
+    
+        //else statement
+        //assumes collection = object
+        else{
+
+        //for in loop for every key in obj
+            for(let key in collection){
+            //returns true if func(collection[key], key, collection) = true
+                if(!func(collection[key], key, collection)){
+                    //if false returns false
+                    return false;
+                }
+                
+            }
+        }
+        return true;
+};
 
 
 /** _.some
