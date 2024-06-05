@@ -451,9 +451,9 @@ _.pluck = function (array, property) {
 */
 _.every = (collection, func) => {
    //if there is no function, check if return value is truthy
-   func = func || function(value){
-    return !!value;
-   }
+   if(func = func || function(value){
+    return value;
+   })
         //check if collection is array
         if(Array.isArray(collection)){
             //for loop thru array
