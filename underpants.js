@@ -556,6 +556,29 @@ _.some = (collection, func) => {
 * Examples:
 *   _.reduce([1,2,3], function(previousSum, currentValue, currentIndex){ return previousSum + currentValue }, 0) -> 6
 */
+_.reduce = function(array, func, seed){
+    let result;
+    //if condition to test if seed is provided
+    if(seed === undefined){
+        result = array[0];
+        //loop thru array
+        for(let i = 1; i < array.length; i++){
+            //reassigning result of invoking callback func of current result + current value @ index
+            result = func(result, array[i], i);
+        }
+    } else{
+        // initialize result as seed input
+        result = seed;
+        //for loop to iterate array starting at 0
+        for(let i = 0; i < array.length; i++){
+            //reassigning result to result of invoking callback func
+            result = func(result, array[i], i);
+        }
+
+    }
+    //return final result
+    return result;
+}
 
 
 /** _.extend
